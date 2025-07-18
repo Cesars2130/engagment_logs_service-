@@ -9,7 +9,7 @@ class EngagementLogService {
   // Esquema de validación para crear engagement log (sin user_id, viene en headers)
   validateEngagementData(data) {
     const schema = Joi.object({
-      view_name: Joi.string().max(255).required(),
+      view_id: Joi.number().integer().min(1).required(),
       duration_seconds: Joi.number().integer().min(0).max(86400).required(), // Máximo 24 horas
       viewed_at: Joi.date().iso().default(() => new Date())
     });
@@ -36,7 +36,7 @@ class EngagementLogService {
         user_id: parseInt(userId)
       };
 
-      // Crear el engagement log
+      // Crear el engagement log (ahora usando view_id directamente)
       const result = await this.engagementLogModel.create(dataWithUserId);
       
       return {

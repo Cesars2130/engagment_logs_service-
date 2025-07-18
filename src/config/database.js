@@ -1,14 +1,14 @@
 require('dotenv').config();
 
 const config = {
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME || 'runinsight_db',
-  user: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || 'password',
-  max: 20, // Máximo número de conexiones en el pool
-  idleTimeoutMillis: 30000, // Tiempo máximo que una conexión puede estar inactiva
-  connectionTimeoutMillis: 2000, // Tiempo máximo para establecer una conexión
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT, 
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 };
 
 module.exports = config; 

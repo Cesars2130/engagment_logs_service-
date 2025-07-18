@@ -30,19 +30,12 @@ const validateUserId = (req, res, next) => {
   next();
 };
 
-/**
- * Middleware opcional para rutas que pueden o no tener user_id
- */
 const optionalUserId = (req, res, next) => {
   const userId = req.headers['user-id'] || req.headers['x-user-id'] || req.headers['userid'];
-  
-  if (userId) {
-    const userIdNum = parseInt(userId);
-    if (!isNaN(userIdNum) && userIdNum > 0) {
-      req.userId = userIdNum;
-    }
+  const userIdNum = parseInt(userId);
+  if (userId && !isNaN(userIdNum) && userIdNum > 0) {
+    req.userId = userIdNum;
   }
-  
   next();
 };
 

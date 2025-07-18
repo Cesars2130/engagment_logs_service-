@@ -667,3 +667,11 @@ ALTER TABLE engagement_logs ADD CONSTRAINT fk_view_id FOREIGN KEY (view_id) REFE
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para detalles. 
+
+## Documentación Swagger
+
+La documentación interactiva de la API está disponible en:
+
+    http://localhost:3001/api-docs
+
+Puedes probar los endpoints y ver los parámetros requeridos directamente desde esa interfaz. 

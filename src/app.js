@@ -4,6 +4,8 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 // Importar rutas
 const engagementLogsRoutes = require('./routes/engagementLogs');
@@ -66,6 +68,30 @@ app.get('/', (req, res) => {
     }
   });
 });
+
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Engagement Service API',
+    version: '1.0.0',
+    description: 'API para el servicio de engagement de RunInsight',
+  },
+  servers: [
+    {
+      url: 'http://localhost:3001',
+      description: 'Servidor local',
+    },
+  ],
+};
+
+const swaggerOptions = {
+  swaggerDefinition,
+  apis: ['./src/routes/*.js', './src/controllers/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Middleware para rutas no encontradas
 app.use('*', (req, res) => {
